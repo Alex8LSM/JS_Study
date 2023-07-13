@@ -1,25 +1,12 @@
-class Storage {
-  constructor(items) {
-    this.items = items;
-  }
-  // Инициализация свойств экземпляра
-  getItems() {
-    return this.items;
-  }
-  addItem(newItem) {
-    this.items.push(newItem);
-  }
-  removeItem(itemToRemove) {
-    const index = this.items.indexOf(itemToRemove);
-    this.items.splice(index, 1);
-  }
+const csvFilePath='./Spot2D/stocks.csv'
+const csv=require('csvtojson');
+const converter=csv({
+    delimiter:";",
+    ignoreEmpty:true,
+});
+ 
+// Async / await usage
+const myResult= async ()=>{
+   return jsonArray=await converter.fromFile(csvFilePath);
 }
-
-// Change code above this line
-// const storage = new Storage("Nanitoids");
-const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
-storage.addItem('Droid');
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
-storage.removeItem('Prolonger');
-console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+myResult().then(jsonArray => console.log(jsonArray));
